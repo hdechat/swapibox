@@ -1,9 +1,9 @@
 .textScroll{
-  position: absolute;
-  left: 30%;
-  width: 40%;
-  animation-name: crawl;
   animation-duration: 30s;
+  animation-name: crawl;
+  position: absolute;
+  text-align: center;
+  width: 30%;
 }
 
 @keyframes crawl {
