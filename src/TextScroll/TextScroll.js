@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TextScroll.scss';
+import './TextScroll.css';
 
 const TextScroll = ({ textCrawl }) => {
   return (
-    <div>
+    <div className="textScroll">
       <p>{textCrawl.text}</p>
       <p>{textCrawl.title}</p>
       <p>{textCrawl.released}</p>
