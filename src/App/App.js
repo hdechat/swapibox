@@ -21,8 +21,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <TextScroll textCrawl={this.state.textCrawl} />
+        <aside>
+          <TextScroll textCrawl={this.state.textCrawl} />
+        </aside>
       </div>
+
     );
   }
 }
