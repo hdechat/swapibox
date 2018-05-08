@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import cleanFilmData from './cleaners.js'
-import filmData from './mockFilmData.js'
+import cleanFilmData from '../cleaners.js'
+import filmData from '../mockFilmData.js'
+import TextScroll from '../TextScroll/TextScroll.js'
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      textCrawl: ''
+      textCrawl: {}
     } 
   }
 
@@ -20,9 +21,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <TextScroll textCrawl={this.state.textCrawl} />
       </div>
     );
   }
 }
-
-export default App;
