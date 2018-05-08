@@ -1,0 +1,13 @@
+.textScroll{
+  position: absolute;
+  left: 30%;
+  width: 40%;
+  animation-name: crawl;
+  animation-duration: 30s;
+}
+
+@keyframes crawl {
+    0%   { bottom:0%; transform:perspective(0px) rotateX(0deg)}
+    100% {bottom:80%; transform:perspective(0px) rotateX(0deg)}
+}
+
