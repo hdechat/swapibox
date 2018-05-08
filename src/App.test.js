@@ -11,11 +11,11 @@ describe('App', () => {
     expect(app).toMatchSnapshot();
   });
 
-  it.skip('fetches data on initial load', () => {
+  xit('fetches data on initial load', () => {
     //test that componentDidMount calls fetch?
   });
 
-  it.skip('renders TextScroll component', () => {
+  xit('renders TextScroll component', () => {
     //would snapshot cover this part?
   });
 });
