@@ -5,8 +5,8 @@ const cleanFilmData = (data) => {
     'title': data.title,
     'text': data.opening_crawl,
     'released': data.release_date
-  }
+  };
 }
 
-export default { cleanFilmData }
+export default cleanFilmData
 
