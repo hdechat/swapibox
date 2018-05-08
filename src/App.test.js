@@ -6,13 +6,15 @@ import App from './App';
 describe('App', () => {
 
   it('matches snapshot', () => {
-    const app = shallow(<App />)
+    const app = shallow(<App />);
 
     expect(app).toMatchSnapshot();
   });
 
-  xit('fetches data on initial load', () => {
-    //test that componentDidMount calls fetch?
+  it('sets state.textCrawl on initial load', () => {
+    const app = shallow(<App />);
+
+    expect(app.state('textCrawl')).toBeDefined();
   });
 
   xit('renders TextScroll component', () => {
