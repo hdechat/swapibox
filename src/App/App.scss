@@ -12,10 +12,9 @@ aside {
   background: url('../assets/background-sw.png');
   background-size: cover;
   height: 100vh;
-  filter: alpha(opacity=60)
 }
 
-main {
+.buttons {
   display: flex;
   justify-content: center;
   padding-top: 15rem;
