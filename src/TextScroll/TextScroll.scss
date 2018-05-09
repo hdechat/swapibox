@@ -1,13 +1,19 @@
 .textScroll{
-  animation-duration: 30s;
+  animation-duration: 10s;
   animation-name: crawl;
+  color: #c0bb00;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  left: 25%;
+  letter-spacing: .2rem;
   position: absolute;
-  text-align: center;
-  width: 30%;
+  text-align: justify;
+  width: 50%;
 }
+
 
 @keyframes crawl {
-    0%   { bottom:0%; transform:perspective(0px) rotateX(0deg)}
-    100% {bottom:80%; transform:perspective(0px) rotateX(0deg)}
+    0%   {top: 100%;}
+    100% {top: 0%;}
 }
-
