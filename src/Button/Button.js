@@ -4,7 +4,11 @@ import './Button.css';
 
 const Button = ({ category, callback }) => {
   return(
-    <button onclick={()=>{}}>{category}</button>
+    <button
+    onClick={()=>{}}
+    className={category === 'favorites' ? "favorites" : "category"}>
+    {category}
+    </button>
   )
 }
 
