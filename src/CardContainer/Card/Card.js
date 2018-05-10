@@ -11,20 +11,20 @@ export default class Card extends Component {
     }
   }
 
-  favoriteCard = (event) => {
-    event.preventDefault();
-    this.props.clickedCard(!this.state.favorited, this.props.card);
-    this.setState({ favorited: !this.state.favorited })
+  favoriteCard = () => {
+    const clickedState = !this.state.favorited
+    this.setState({ favorited: clickedState })
+    this.props.clickedCard(clickedState, this.props.card);
   }
 
   render() {
     return (
       <article>
       <img
+        onClick={this.favoriteCard}
         className={this.state.favorited ? "active" : "not-active"}
         src="./../assets/logo.png"
-        alt="Star Wars Rebel Alliance Logo"
-        onClick={this.favoriteCard} />
+        alt="Star Wars Rebel Alliance Logo" />
       <h2>{this.props.card.name}</h2>
       <h5>Species: {this.props.card.species}</h5>
       <h5>Homeworld: {this.props.card.homeworld}</h5>

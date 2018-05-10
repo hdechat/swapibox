@@ -79,7 +79,11 @@ export default class App extends Component {
   }
 
   showFavorites = () => {
-    this.setState({ cardList: this.favorites})
+    this.setState({ cardList: this.favorites});
+
+    // if(!this.favorites) {
+    //   document.querySelector('section').appendChild(`<h2>There Are No Favorites</h2>`);
+    // }
   }
   
   render() {
