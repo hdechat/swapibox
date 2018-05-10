@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card/Card.js';
 import './CardContainer.css';
 
-const CardContainer = ({ cardList, clickedCard }) => {
-  const cards = cardList.map((card, index) => {
-    return(
-      <Card key={index} card={card} clickedCard={clickedCard}/>
-    )
-  });
+class CardContainer extends Component {
 
-  return(
-    <section>
-      {cards}
-    </section>
-  )
+  componentDidMount() {
+    //fetch data based on button click category
+  }
+
+
+  render() {
+    const cards = this.props.cardList.map((card, index) => {
+      return(
+        <Card key={index} card={card} clickedCard={this.props.clickedCard}/>
+      )
+    });
+    return(
+      <section>
+        {cards}
+      </section>
+    )
+  }
 }
 
 CardContainer.propTypes = {

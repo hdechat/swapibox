@@ -12,11 +12,10 @@ export default class Card extends Component {
   }
 
   favoriteCard = () => {
-    const clickedState = !this.state.favorited
-    this.setState({ favorited: clickedState })
-    this.props.clickedCard(clickedState, this.props.card);
+    this.setState({ favorited: !this.state.favorited}, 
+      function(){this.props.clickedCard(this.state.favorited, this.props)})
+    console.log(this.state.favorited)
   }
-
   render() {
     return (
       <article>

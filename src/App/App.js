@@ -29,11 +29,12 @@ export default class App extends Component {
     );
   }
 
-  clickedCard = (fave, card) => {
-    if(fave) {
+  clickedCard = (faved, card) => {
+    console.log(faved)
+    if(faved) {
       this.favorites.push(card);
     } else {
-      const unFave = this.favorites.findIndex(person => person.name === card.name);
+      let unFave = this.favorites.findIndex(person => person.name === card.name);
       this.favorites.splice(unFave, 1);
     }
   } 
@@ -80,10 +81,6 @@ export default class App extends Component {
 
   showFavorites = () => {
     this.setState({ cardList: this.favorites});
-
-    // if(!this.favorites) {
-    //   document.querySelector('section').appendChild(`<h2>There Are No Favorites</h2>`);
-    // }
   }
   
   render() {
