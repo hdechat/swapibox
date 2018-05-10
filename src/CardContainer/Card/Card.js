@@ -6,8 +6,8 @@ const Card = ({ card }) => {
   return (
     <article>
      <h2>{card.name}</h2>
-     <h5>{card.species}</h5>
-     <h5>{card.homeworld}</h5>
+     <h5>Species: {card.species}</h5>
+     <h5>Homeworld: {card.homeworld}</h5>
      <p>pop: {card.population}</p>
 
     </article>

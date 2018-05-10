@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import cleanFilmData from '../cleaners.js';
-import filmData from '../mockFilmData.js';
 import TextScroll from '../TextScroll/TextScroll.js';
 import Button from '../Button/Button.js';
 import CardContainer from '../CardContainer/CardContainer.js';
@@ -14,53 +12,59 @@ export default class App extends Component {
       textCrawl: {},
       cardList: []
     } 
-
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let randomFilm = Math.floor(Math.random() * 7 + 1);
 
-    const textCrawl = cleanFilmData(filmData);
-    this.setState({ textCrawl });
+    const response = await fetch(`https://swapi.co/api/films/${randomFilm}`);
+    const data = await response.json();
+    this.setState(
+      { textCrawl: {
+        'title': data.title,
+        'text': data.opening_crawl,
+        'released': data.release_date
+      }}
+    );
+  }
 
-    // let randomFilm = Math.floor(Math.random() * 7 + 1)
-    //  fetch(`https://swapi.co/api/films/${randomFilm}`)
-    // .then(response => response.json())
-    // .then(data => {
-    //   const textCrawl = cleanFilmData(data);
-    //   this.setState({ textCrawl });
-    // })
+  fetchHomeData = async ({ homeworld, name }) => {
+    const response = await fetch(homeworld);
+    const data = await response.json();
+    return await {name: name, homeworld: data.name, population: data.population};
+  }
+
+  fetchSpeciesData = async (person) => {
+    const response = await fetch(...person.species);
+    const data = await response.json();
+    return await {species: data.name};
   }
 
   createPeopleData = (people) => {
     const peopleData = people.reduce((arr, person) => {
-      const nameAndHome = fetch(person.homeworld)
-      .then(response => response.json())
-      .then(data => ({name: person.name, homeworld: data.name, population: data.population}));
-
-      if(person.species.length > 0) {
-      const species = fetch(person.species[0])
-      .then(response => response.json())
-      .then(data => ({name: person.name, species: data.name}));
-      return [...arr, nameAndHome, species]
+      if(person.species.length) {
+        const species = this.fetchSpeciesData(person)
+      return [...arr, species, this.fetchHomeData(person)];
       } else {
-        return [...arr, nameAndHome, {name: person.name, species: person.species}]
+        return [...arr, {species: 'unknown'}, this.fetchHomeData(person)];
       }
     }, []);
-
     return Promise.all(peopleData);
   }
 
-  fetchPeopleList = () => {
+  fetchPeopleList = async () => {
     for(let i = 1; i < 10; i++) { 
-      fetch(`https://swapi.co/api/people/?page=${i}`)
-      .then(response => response.json())
-      .then(data => this.createPeopleData(data.results))
-      .then(cards => {
-          const mergedCards = cards.reduce((arr, card, index) => {
-          return [...arr, {...card, ...cards[index+1]}]
-        }, []);
-        this.setState({ cardList: [ ...this.state.cardList, ...mergedCards] });
-      });
+      const response = await fetch(`https://swapi.co/api/people/?page=${i}`);
+      const data = await response.json();
+      const cards = await this.createPeopleData(data.results);
+
+      let mergedCards = [];
+
+      while(cards.length) {
+          mergedCards.push({...cards.shift(), ...cards.shift()});
+        }
+
+      this.setState({ cardList: [...this.state.cardList, ...mergedCards] });
     }
   }
   
