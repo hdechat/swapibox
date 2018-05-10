@@ -4,6 +4,7 @@ aside {
   width: 100%;
   height: 100vh;
   opacity: .9;
+  overflow: hidden;
   position: absolute;
   z-index: 10;
 }
@@ -12,10 +13,9 @@ aside {
   background: url('../assets/background-sw.png');
   background-size: cover;
   height: 100vh;
-  filter: alpha(opacity=60)
 }
 
-main {
+.buttons {
   display: flex;
   justify-content: center;
   padding-top: 15rem;

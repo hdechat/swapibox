@@ -5,7 +5,7 @@ import './Button.css';
 const Button = ({ category, callback }) => {
   return(
     <button
-    onClick={()=>{}}
+    onClick={ callback }
     className={category === 'favorites' ? "favorites" : "category"}>
     {category}
     </button>
