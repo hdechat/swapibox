@@ -8,6 +8,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    this.favorites = [];
     this.state = {
       textCrawl: {},
       cardList: []
@@ -27,6 +28,15 @@ export default class App extends Component {
       }}
     );
   }
+
+  clickedCard = (fave, card) => {
+    if(fave) {
+      this.favorites.push(card);
+    } else {
+      const unFave = this.favorites.findIndex(person => person.name === card.name);
+      this.favorites.splice(unFave, 1);
+    }
+  } 
 
   fetchHomeData = async ({ homeworld, name }) => {
     const response = await fetch(homeworld);
@@ -67,6 +77,10 @@ export default class App extends Component {
       this.setState({ cardList: [...this.state.cardList, ...mergedCards] });
     }
   }
+
+  showFavorites = () => {
+    this.setState({ cardList: this.favorites})
+  }
   
   render() {
     return (
@@ -76,12 +90,12 @@ export default class App extends Component {
         </aside>
         <main>
           <div className="buttons">
-          <Button category={"favorites"} callback={()=>{}} />
+          <Button category={"favorites"} callback={this.showFavorites} />
           <Button category={"People"} callback={this.fetchPeopleList} />
           <Button category={"Vehicles"} callback={()=>{}} />
           <Button category={"Planets"} callback={()=>{}} />
           </div>
-          <CardContainer cardList={this.state.cardList}/>
+          <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>
         </main>
       </div>
 

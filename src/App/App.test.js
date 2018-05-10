@@ -5,29 +5,29 @@ import App from './App.js';
 import TextScroll from '../TextScroll/TextScroll.js'
 
 describe('App', () => {
+  let app;
 
-  window.fetch = jest.fn()
-    .mockImplementation(() => Promise.resolve({ json: () => Promise.resolve({ 'title': 'movie' })}))
+  beforeEach(() => {
+    app = shallow(<App />);
+  })
 
   it('matches snapshot', () => {
-    const app = shallow(<App />);
-
     expect(app).toMatchSnapshot();
   });
 
-  // it('calls fetch in componentDidMount', () => {
-  //   const app = shallow(<App />);
-
-  //   const expected = { method: 'GET', body: JSON.stringify({ 'title': 'movie' })}
-
-  //   app.instance()
-  //   let randomFilm = Math.floor(Math.random() * 7 + 1)
-  //   expect(window.fetch).toHaveBeenCalledWith(`https://swapi.co/api/films/${randomFilm}`, expected)
-  // });
-
-  it('sets state.textCrawl on initial load', () => {
-    const app = shallow(<App />);
-
+  xit('sets state.textCrawl on initial load', () => {
     expect(app.state('textCrawl')).toBeDefined();
+  });
+
+  it('should add card to favoriteList when parameter is true', () => {
+    const fave = true;
+    const card = {name: "Name"};
+
+    app.instance().clickedCard(fave, card);
+
+    expect(app.favorites).length.toEqual(1);
+  })
+
+  xit('should delete card from favoriteList when parameter is false', () => {
   });
 });

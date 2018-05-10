@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Card from './Card/Card.js';
 import './CardContainer.css';
 
-const CardContainer = ({ cardList }) => {
-  const cards = cardList.map(card => {
+const CardContainer = ({ cardList, clickedCard }) => {
+  const cards = cardList.map((card, index) => {
     return(
-      <Card card={card}/>
+      <Card key={index} card={card} clickedCard={clickedCard}/>
     )
   });
 

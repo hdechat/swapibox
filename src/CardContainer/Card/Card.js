@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Card.css';
 
-const Card = ({ card }) => {
-  return (
-    <article>
-     <h2>{card.name}</h2>
-     <h5>Species: {card.species}</h5>
-     <h5>Homeworld: {card.homeworld}</h5>
-     <p>pop: {card.population}</p>
+export default class Card extends Component {
+  constructor(props) {
+    super(props);
 
-    </article>
-  )
+    this.state = {
+      favorited: false
+    }
+  }
+
+  favoriteCard = (event) => {
+    event.preventDefault();
+    this.props.clickedCard(!this.state.favorited, this.props.card);
+    this.setState({ favorited: !this.state.favorited })
+  }
+
+  render() {
+    return (
+      <article>
+      <img
+        className={this.state.favorited ? "active" : "not-active"}
+        src="./../assets/logo.png"
+        alt="Star Wars Rebel Alliance Logo"
+        onClick={this.favoriteCard} />
+      <h2>{this.props.card.name}</h2>
+      <h5>Species: {this.props.card.species}</h5>
+      <h5>Homeworld: {this.props.card.homeworld}</h5>
+      <p>population: {this.props.card.population}</p>
+      </article>
+    )
+  }
 }
 
 Card.propTypes = {
   card: PropTypes.object
 }
-
-export default Card;
