@@ -9,7 +9,7 @@ describe('CardContainer', () => {
   let mockArray = [];
 
   beforeEach(() => {
-    cardContainer = shallow(<CardContainer cardList={mockArray}/>)
+    cardContainer = shallow(<CardContainer clickedCard={jest.fn()} cardList={mockArray}/>)
   });
 
   it('matches snapshot', () => {

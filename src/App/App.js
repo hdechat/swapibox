@@ -10,15 +10,17 @@ export default class App extends Component {
 
     this.state = {
       textCrawl: {},
-      cardList: []
+      cardList: [],
+      favorites: [],
+      //Refactor: inital fetch to get links to categories
+      // peopleLink: null,
+      // vehicleLink: null,
+      // planetsLink: null
     } 
   }
 
   async componentDidMount() {
-    let randomFilm = Math.floor(Math.random() * 7 + 1);
-
-    const response = await fetch(`https://swapi.co/api/films/${randomFilm}`);
-    const data = await response.json();
+    const data = await this.fetchTextCrawl();
     this.setState(
       { textCrawl: {
         'title': data.title,
@@ -26,6 +28,27 @@ export default class App extends Component {
         'released': data.release_date
       }}
     );
+  }
+
+  fetchTextCrawl = async () => {
+    let randomFilm = Math.floor(Math.random() * 7 + 1);
+    const response = await fetch(`https://swapi.co/api/films/${randomFilm}`);
+    return await response.json();
+  }
+
+  clickedCard = (faved, card) => {
+    const upDatedCard = {...card, favorited: faved}
+    const upDatedCardList = this.state.cardList
+      .map(person => card.name === person.name ? upDatedCard : person);
+    this.setState({ cardList: upDatedCardList });
+
+    if(faved) {
+      this.setState({ favorites: [...this.state.favorites, upDatedCard] });
+    } else {
+      const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
+      this.setState({ favorites: upDatedFaves});
+      document.querySelector('.favorites').classList.value.includes('active') ? this.setState({ cardList: upDatedFaves }) : '';
+    }
   }
 
   fetchHomeData = async ({ homeworld, name }) => {
@@ -53,19 +76,32 @@ export default class App extends Component {
   }
 
   fetchPeopleList = async () => {
-    for(let i = 1; i < 10; i++) { 
+    let peopleCards = [];
+
+    //there are 9 pages of data available. to fetch all 9 pages change the iteration length to 10.
+    for(let i = 1; i < 2; i++) { 
       const response = await fetch(`https://swapi.co/api/people/?page=${i}`);
       const data = await response.json();
       const cards = await this.createPeopleData(data.results);
 
-      let mergedCards = [];
-
       while(cards.length) {
-          mergedCards.push({...cards.shift(), ...cards.shift()});
-        }
-
-      this.setState({ cardList: [...this.state.cardList, ...mergedCards] });
+          peopleCards.push({...cards.shift(), ...cards.shift(), favorited: false});
+      }
     }
+
+    const mergedCards = peopleCards.map(card => {
+      const favorited = this.state.favorites.find(fave => fave.name === card.name);
+      return (favorited ? favorited : card);
+    });
+
+    this.setState({ cardList: mergedCards });
+  }
+
+  showFavorites = () => {
+    // if(!this.state.favorites.length) {
+    //   document.querySelector('section').innerHTML = '<h1>No Favorite Cards</h1>';
+    // }
+    this.setState({ cardList: this.state.favorites });
   }
   
   render() {
@@ -76,15 +112,14 @@ export default class App extends Component {
         </aside>
         <main>
           <div className="buttons">
-          <Button category={"favorites"} callback={()=>{}} />
-          <Button category={"People"} callback={this.fetchPeopleList} />
-          <Button category={"Vehicles"} callback={()=>{}} />
-          <Button category={"Planets"} callback={()=>{}} />
+            <Button category={"favorites"} callback={this.showFavorites} />
+            <Button category={"People"} callback={this.fetchPeopleList} />
+            <Button category={"Vehicles"} callback={()=>{}} />
+            <Button category={"Planets"} callback={()=>{}} />
           </div>
-          <CardContainer cardList={this.state.cardList}/>
+          <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>
         </main>
       </div>
-
     );
   }
 }
