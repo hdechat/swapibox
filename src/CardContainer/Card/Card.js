@@ -18,7 +18,6 @@ export default function Card({ card, clickedCard }) {
       <p>population: {card.population}</p>
       </article>
     )
-  // }
 }
 
 Card.propTypes = {
