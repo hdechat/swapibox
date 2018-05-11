@@ -12,10 +12,6 @@ export default class App extends Component {
       textCrawl: {},
       cardList: [],
       favorites: [],
-      //Refactor: inital fetch to get links to categories
-      // peopleLink: null,
-      // vehicleLink: null,
-      // planetsLink: null
     } 
   }
 
@@ -40,15 +36,25 @@ export default class App extends Component {
     const upDatedCard = {...card, favorited: faved}
     const upDatedCardList = this.state.cardList
       .map(person => card.name === person.name ? upDatedCard : person);
+
     this.setState({ cardList: upDatedCardList });
 
     if(faved) {
-      this.setState({ favorites: [...this.state.favorites, upDatedCard] });
+      this.addToFavorites(upDatedCard);
     } else {
-      const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
-      this.setState({ favorites: upDatedFaves});
-      document.querySelector('.favorites').classList.value.includes('active') ? this.setState({ cardList: upDatedFaves }) : '';
+      this.removeFromFavorites(card);
     }
+  }
+
+  addToFavorites(card) {
+    this.setState({ favorites: [...this.state.favorites, card] });
+  }
+
+  removeFromFavorites(card) {
+    const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
+    this.setState({ favorites: upDatedFaves});
+    document.querySelector('.favorites').classList.value.includes('active') ? 
+      this.setState({ cardList: upDatedFaves }) : '';
   }
 
   fetchHomeData = async ({ homeworld, name }) => {
@@ -98,9 +104,7 @@ export default class App extends Component {
   }
 
   showFavorites = () => {
-    // if(!this.state.favorites.length) {
-    //   document.querySelector('section').innerHTML = '<h1>No Favorite Cards</h1>';
-    // }
+    
     this.setState({ cardList: this.state.favorites });
   }
   

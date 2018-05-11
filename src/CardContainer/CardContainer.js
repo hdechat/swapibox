@@ -12,6 +12,8 @@ const CardContainer = ({ cardList, clickedCard }) => {
 
   return(
     <section>
+      <h1 className={cardList.length ? "cards-to-display": "no-cards"}>
+      There Are No Cards To Display</h1>
       {cards}
     </section>
   )
