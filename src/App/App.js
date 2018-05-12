@@ -64,9 +64,19 @@ export default class App extends Component {
   }
 
   fetchPeople = async () => {
-    const peopleCards = await call.fetchPeopleList(this.state.categoryLinks.people);
+    //   there are 9 pages of data available. to fetch all 9 pages change the iteration length to 10.
+    let mergedData = [];
 
-    const cardList = peopleCards.map(card => {
+    for(let i = 1; i < 2; i++) { 
+       // + `?page=${i}`
+    const peopleData = await call.fetchCall(this.state.categoryLinks.people + `?page=${i}`);
+
+    const cleanedData = await call.cleanPeopleData(peopleData.results);
+
+      mergedData.push(...cleanedData);
+    }
+    console.log(mergedData)
+    const cardList = mergedData.map(card => {
       const favorited = this.state.favorites.find(fave => fave.name === card.name);
       return (favorited ? favorited : card);
     });

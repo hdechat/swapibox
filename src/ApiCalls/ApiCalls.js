@@ -10,44 +10,14 @@ export default class ApiCalls {
     }
   }
 
-  //PEOPLE//
+  cleanPeopleData = async (people) => {
+    const unresolvedPromises = people.map(async person => {
+      const speciesData = await this.fetchCall(...person.species);
+      const homeData = await this.fetchCall(person.homeworld);
 
-  fetchPeopleList = async (url) => {
-    let peopleCards = [];
-
-    //there are 9 pages of data available. to fetch all 9 pages change the iteration length to 10.
-    for(let i = 1; i < 2; i++) { 
-      const response = await fetch(url + `?page=${i}`);  ///await fetch
-      const data = await response.json();  ///response json
-      const cards = await this.createPeopleData(data.results);
-
-      while(cards.length) {
-          peopleCards.push({...cards.shift(), ...cards.shift(), favorited: false});
-      }
-    }
-
-    return peopleCards;
+      return {name: person.name, species: speciesData.name, homeworld: homeData.name, population: homeData.population, favorited: false}
+    })
+    return await Promise.all(unresolvedPromises);
   }
 
-  createPeopleData = (people) => {
-    const peopleData = people.reduce((arr, person) => {
-      if(person.species.length) {
-        const species = this.fetchSpeciesData(person)
-      return [...arr, species, this.fetchHomeData(person)];
-      } else {
-        return [...arr, {species: 'unknown'}, this.fetchHomeData(person)];
-      }
-    }, []);
-    return Promise.all(peopleData);
-  }
-
-  fetchSpeciesData = async (person) => {
-    const data = await this.fetchCall(...person.species); 
-    return await {species: data.name};
-  }
-
-  fetchHomeData = async ({ homeworld, name }) => {
-    const data = await this.fetchCall(homeworld);
-    return await {name: name, homeworld: data.name, population: data.population};
-  }
 }

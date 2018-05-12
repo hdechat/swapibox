@@ -15,32 +15,32 @@ import TextScroll from '../TextScroll/TextScroll.js'
 //   it('sets an error when the fetch fails', () => {
 //   })
 
-describe('App', () => {
-  let app;
+// describe('App', () => {
+//   let app;
 
-  describe('componentDidMount', () => {
+//   describe('componentDidMount', () => {
 
-    beforeEach(() => {
-      app = shallow(<App />);
-    })
+//     beforeEach(() => {
+//       app = shallow(<App />);
+//     })
   
-    it('matches snapshot', () => {
-      expect(app).toMatchSnapshot();
-    });
+//     it('matches snapshot', () => {
+//       expect(app).toMatchSnapshot();
+//     });
   
-    xit('calls fetch with the correct data on initial load', () => {
+//     xit('calls fetch with the correct data on initial load', () => {
   
-    })
+//     })
   
-    xit('resets state on initial load', () => {
+//     xit('resets state on initial load', () => {
   
-    });
+//     });
 
-    xit('sets an error when the fetch fails', () => {
+//     xit('sets an error when the fetch fails', () => {
 
-    });
-  });
-});
+//     });
+//   });
+// });
 
 
 

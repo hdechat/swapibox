@@ -38,23 +38,12 @@ describe('ApiCalls', () => {
     });
 
     it('throws an error if status code is not ok', async () => {
-      window.fetch = jest.fn().mockImplementation(() => 
-        Promise.resolve({status: 500}));
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({status: 500}));
 
       const expectation = "Data not available"
 
       await expect(apiCalls.fetchCall(mockUrl)).rejects.toEqual(Error(expectation));
     });
-  });
-
-  describe('fetchPeopleList', () => {
-
-    it('calls fetchPeopleList with the correct params', async () => {
-
-    });
-
-    it('returns')
-
   });
 });
      
