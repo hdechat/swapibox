@@ -68,14 +68,12 @@ export default class App extends Component {
     let mergedData = [];
 
     for(let i = 1; i < 2; i++) { 
-       // + `?page=${i}`
-    const peopleData = await call.fetchCall(this.state.categoryLinks.people + `?page=${i}`);
+      const peopleData = await call.fetchCall(this.state.categoryLinks.people + `?page=${i}`);
+      const cleanPeopleData = await call.cleanPeopleData(peopleData.results);
 
-    const cleanedData = await call.cleanPeopleData(peopleData.results);
-
-      mergedData.push(...cleanedData);
+      mergedData.push(...cleanPeopleData);
     }
-    console.log(mergedData)
+    
     const cardList = mergedData.map(card => {
       const favorited = this.state.favorites.find(fave => fave.name === card.name);
       return (favorited ? favorited : card);

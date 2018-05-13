@@ -44,6 +44,42 @@ describe('ApiCalls', () => {
 
       await expect(apiCalls.fetchCall(mockUrl)).rejects.toEqual(Error(expectation));
     });
+
+    describe('cleanPeopleData', () => {
+
+      beforeEach(() => {
+        let mockPeopleData = [
+            {name: 'Name',
+              species: ['https://swapi.com/people/species'],
+              homeworld: 'https://swapi.com/people/homeworld',
+            },
+            {name: 'Name2',
+              species: ['https://swapi.com/people/species'],
+              homeworld: 'https://swapi.com/people/homeworld',
+            }
+          ];
+        let mockSpeciesData = {name: 'species'}
+        let mockHomeworldData = {name: 'Home', populaton: '5'}
+        mockUrl = 'https://swapi.com/people/';
+
+      });
+
+      it('calls a fetch for species data', () => {
+        apiCalls.fetchCall = jest.fn();
+
+        expect(apiCalls.cleanPeopleData(mockPeopleData)).resolves.toEqual();   
+
+
+      })
+
+    });
   });
 });
+
+
+
+
+
+
+
      

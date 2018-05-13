@@ -15,8 +15,15 @@ export default class ApiCalls {
       const speciesData = await this.fetchCall(...person.species);
       const homeData = await this.fetchCall(person.homeworld);
 
-      return {name: person.name, species: speciesData.name, homeworld: homeData.name, population: homeData.population, favorited: false}
-    })
+      return {
+        name: person.name, 
+        species: speciesData.name, 
+        homeworld: homeData.name, 
+        population: homeData.population, 
+        favorited: false
+      }
+    });
+
     return await Promise.all(unresolvedPromises);
   }
 
