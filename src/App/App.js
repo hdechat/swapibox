@@ -64,21 +64,23 @@ export default class App extends Component {
   }
 
   fetchPeople = async () => {
-    //   there are 9 pages of data available. to fetch all 9 pages change the iteration length to 10.
-    let mergedData = [];
 
-    for(let i = 1; i < 2; i++) { 
-      const peopleData = await call.fetchCall(this.state.categoryLinks.people + `?page=${i}`);
-      const cleanPeopleData = await call.cleanPeopleData(peopleData.results);
-
-      mergedData.push(...cleanPeopleData);
-    }
-    
-    const cardList = mergedData.map(card => {
+    const peopleData = await call.fetchCall(this.state.categoryLinks.people);
+    const cleanPeopleData = await call.cleanPeopleData(peopleData.results);
+    const cardList = cleanPeopleData.map(card => {
       const favorited = this.state.favorites.find(fave => fave.name === card.name);
       return (favorited ? favorited : card);
     });
+    this.setState({ cardList });
+  }
 
+  fetchVehicles = async () => {
+    const vehiclesData = await call.fetchCall(this.state.categoryLinks.vehicles);
+    const cleanVehiclesData = call.cleanVehiclesData(vehiclesData.results);
+    const cardList = cleanVehiclesData.map(card => {
+      const favorited = this.state.favorites.find(fave => fave.name === card.name);
+      return (favorited ? favorited : card);
+    });
     this.setState({ cardList });
   }
   
@@ -92,7 +94,7 @@ export default class App extends Component {
           <div className="buttons">
             <Button category={"favorites"} callback={this.showFavorites} />
             <Button category={"People"} callback={this.fetchPeople} />
-            <Button category={"Vehicles"} callback={()=>{}} />
+            <Button category={"Vehicles"} callback={this.fetchVehicles} />
             <Button category={"Planets"} callback={()=>{}} />
           </div>
           <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>

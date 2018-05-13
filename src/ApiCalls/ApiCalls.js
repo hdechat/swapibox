@@ -27,4 +27,16 @@ export default class ApiCalls {
     return await Promise.all(unresolvedPromises);
   }
 
+  cleanVehiclesData = (vehicles) => {
+    return vehicles.map(vehicle => {
+      return {
+        name: vehicle.name,
+        model: vehicle.model,
+        class: vehicle.vehicle_class,
+        maxPassengers: vehicle.passengers,
+        favorited: false
+      }
+    });
+  }
+
 }
