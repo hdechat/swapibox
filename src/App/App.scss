@@ -1,7 +1,7 @@
 aside {
   background-color: black;
   color: white;
-  height: 100vh;
+  height: 850px;
   opacity: .9;
   overflow: hidden;
   position: absolute;
@@ -12,6 +12,7 @@ aside {
 .background {
   background: url('../assets/background-sw.png');
   background-size: cover;
+  font-family: 'Pathway Gothic One', sans-serif;
   height: 850px;
 }
 

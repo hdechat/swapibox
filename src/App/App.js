@@ -31,9 +31,22 @@ export default class App extends Component {
       }
 
     this.setState({ textCrawl });
+
+    for( let i=0; i<localStorage.length; i++) {
+      const key = localStorage.key(i)
+      this.state.favorites.push(JSON.parse(localStorage.getItem(key)))
+    }
+    this.setState({ favorites: this.state.favorites });
   }
 
-  
+  setToStorage(card) {
+    const stringified = JSON.stringify(card)
+    localStorage.setItem(card.name, stringified);
+  }
+
+  getFromStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
 
   clickedCard = (faved, card) => {
     const upDatedCard = {...card, favorited: faved}
@@ -46,10 +59,12 @@ export default class App extends Component {
   }
 
   addToFavorites(card) {
+    this.setToStorage(card);
     this.setState({ favorites: [...this.state.favorites, card] });
   }
 
   removeFromFavorites(card) {
+    localStorage.removeItem(card.name)
     const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
     this.setState({ favorites: upDatedFaves });
 
