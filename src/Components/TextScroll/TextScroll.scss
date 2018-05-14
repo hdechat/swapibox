@@ -10,10 +10,11 @@
   position: absolute;
   text-align: justify;
   width: 50%;
+
 }
 
 
 @keyframes crawl {
-    0%   {top: 100%;}
-    100% {top: 0%;}
+    0%   {top: 100%; transform: rotateX(20deg)  translateZ(0);}
+    100% {top: 0% transform: rotateX(25deg) translateZ(-2500px);}
 }

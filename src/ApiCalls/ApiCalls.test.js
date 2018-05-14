@@ -77,8 +77,6 @@ describe('ApiCalls', () => {
 
         expect(window.fetch).toHaveBeenCalledWith('https://swapi.com/people/homeworld');   
       });
-
-
     });
   });
 });

@@ -1,9 +1,16 @@
 button {
-  margin: auto 3rem;
-  height: 3rem;
-  width: 10rem;
   border-radius: 50%;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.5rem;
+  height: 3rem;
+  outline: none;
+  margin: auto 6rem;
+  width: 10rem;
+}
+
+button.active {
+  background: black;
+  color: white;
 }
 
 

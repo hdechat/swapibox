@@ -1,15 +1,21 @@
 section {
+  border: solid;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
+  margin: 1rem auto;
   width: 75%;
-  height: 400px;
+  height: 500px;
   overflow-y: scroll;
+}
+
+h1 {
+  font-size: 50px;
 }
 
 .no-cards {
   display: block;
+  margin-top: 10rem;
 }
 
 .cards-to-display {
