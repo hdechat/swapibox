@@ -4,21 +4,25 @@ import './Card.css';
 import favoriteButton from '../../assets/logo.png';
 
 export default function Card({ card, clickedCard }) {
- 
+  const data = Object.entries(card).map(([key, value]) => {
+    if(key !== 'favorited') {
+      return (
+        <h6>{key}: {value}</h6>
+      )
+    }
+  })
+
+
     return (
       <article>
-      <img
-        onClick={() => clickedCard(!card.favorited, card)}
-        className={card.favorited ? "active" : "not-active"}
-        src={favoriteButton}
-        alt="Star Wars Rebel Alliance Logo" />
-      <h2>{card.name}</h2>
-      <h5>Species: {card.species}</h5>
-      <h5>Homeworld: {card.homeworld}</h5>
-      <p>population: {card.population}</p>
+        <img
+          onClick={() => clickedCard(!card.favorited, card)}
+          className={card.favorited ? "active" : "not-active"}
+          src={favoriteButton}
+          alt="Star Wars Rebel Alliance Logo" />
+        {data}
       </article>
     )
-  // }
 }
 
 Card.propTypes = {
