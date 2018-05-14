@@ -4,11 +4,10 @@ import './Card.css'
 import favoriteButton from '../../../assets/logo.png'
 
 export default function Card ({ card, clickedCard }) {
-  // eslint-disable-next-line 
-  const data = Object.entries(card).map(([key, value]) => {
-    if(key !== 'favorited') {
+  const data = Object.entries(card).map(([key, value], index) => {
+    if (key !== 'favorited') {
       return (
-        <h6>{key}: {value}</h6>
+        <h6 key={value + index}>{key}: {value}</h6>
       )
     }
   })
@@ -16,9 +15,10 @@ export default function Card ({ card, clickedCard }) {
     <article>
       <img
         onClick={() => clickedCard(!card.favorited, card)}
-        className={card.favorited ? "active" : "not-active"}
+        className={card.favorited ? 'active' : 'not-active'}
         src={favoriteButton}
-        alt="Star Wars Rebel Alliance Logo" />
+        alt="Star Wars Rebel Alliance Logo"
+      />
       {data}
     </article>
   )
