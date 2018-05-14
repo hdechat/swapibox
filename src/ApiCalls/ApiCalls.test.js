@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import { shallow, mount } from 'enzyme';
 import ApiCalls from './ApiCalls.js';
 
 describe('ApiCalls', () => {
@@ -10,6 +7,10 @@ describe('ApiCalls', () => {
 
   beforeEach(() => {
     apiCalls = new ApiCalls();
+
+    window.fetch = jest.fn().mockImplementation(() => 
+      Promise.resolve({status: 200, json: () => 
+      Promise.resolve(mockData)}));
   });
 
   describe('fetchCall', () => {
@@ -18,9 +19,6 @@ describe('ApiCalls', () => {
       mockData = {prop: 'string'}
       mockUrl = 'https://swapi.com'
 
-      window.fetch = jest.fn().mockImplementation(() => 
-        Promise.resolve({status: 200, json: () => 
-        Promise.resolve(mockData)}));
     });
 
     it('calls fetchCall with the correct params', async () => {
@@ -46,36 +44,44 @@ describe('ApiCalls', () => {
     });
 
     describe('cleanPeopleData', () => {
+      let mockPeopleData;
+      let mockReturnData;
 
       beforeEach(() => {
-        let mockPeopleData = [
-            {name: 'Name',
-              species: ['https://swapi.com/people/species'],
-              homeworld: 'https://swapi.com/people/homeworld',
-            },
-            {name: 'Name2',
+        mockReturnData = [
+          {favorited: false,
+          homeworld: 'Earth',
+          name: 'Persona',
+          population: 5,
+          species: 'Human'},
+          ];
+        mockPeopleData = [
+            {name: 'Persona',
               species: ['https://swapi.com/people/species'],
               homeworld: 'https://swapi.com/people/homeworld',
             }
           ];
-        let mockSpeciesData = {name: 'species'}
-        let mockHomeworldData = {name: 'Home', populaton: '5'}
-        mockUrl = 'https://swapi.com/people/';
-
+        mockData = {name: 'Human', population: 5};
       });
 
-      it('calls a fetch for species data', () => {
-        apiCalls.fetchCall = jest.fn();
+      xit('calls a fetch for species data', () => {
+        apiCalls.cleanPeopleData(mockPeopleData);
 
-        expect(apiCalls.cleanPeopleData(mockPeopleData)).resolves.toEqual();   
+        expect(window.fetch).toHaveBeenCalledWith('https://swapi.com/people/species');   
 
+        expect(apiCalls.cleanPeopleData(mockPeopleData)).resolves.toEqual(mockReturnData);
+      });
 
-      })
+      xit('calls a fetch for homeworld data', () => {
+        apiCalls.cleanPeopleData(mockPeopleData);
+
+        expect(window.fetch).toHaveBeenCalledWith('https://swapi.com/people/homeworld');   
+      });
+
 
     });
   });
 });
-
 
 
 

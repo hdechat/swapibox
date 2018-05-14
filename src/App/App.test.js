@@ -1,61 +1,83 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import App from './App.js';
-import TextScroll from '../TextScroll/TextScroll.js'
-// it('calls fetch with the correct data when adding a new grocery', () => {
-//   })
 
-//   it('resets the state after adding a new grocery', () => {
-//   })
+describe('App', () => {
+  let app;
+  let expected;
 
-//   it('calls the updateGroceryList callback after adding a new grocery', () => {
-//   })
+  beforeEach(async () => {
+    app = await shallow(<App />, {disableLifecycleMethods: true})
+  });
 
-//   it('sets an error when the fetch fails', () => {
-//   })
+  it('matches snapshot', () => {
+    expect(app).toMatchSnapshot();
+  });
 
-// describe('App', () => {
-//   let app;
+  describe('CLICKEDCARD', () => { 
+    let mockCard;
 
-//   describe('componentDidMount', () => {
-
-//     beforeEach(() => {
-//       app = shallow(<App />);
-//     })
-  
-//     it('matches snapshot', () => {
-//       expect(app).toMatchSnapshot();
-//     });
-  
-//     xit('calls fetch with the correct data on initial load', () => {
-  
-//     })
-  
-//     xit('resets state on initial load', () => {
-  
-//     });
-
-//     xit('sets an error when the fetch fails', () => {
-
-//     });
-//   });
-// });
+    beforeEach(() => {
+      mockCard = {name: 'abc', favorited: false};
+    });
 
 
+    it('should change the favorited value of card to equal passed in value', () => {
+      const expectation = [{name: 'abc', favorited: true}];
 
-  // xit('sets state.textCrawl on initial load', () => {
-  //   expect(app.state('textCrawl')).toBeDefined();
-  // });
+      app.instance().clickedCard(true, mockCard);
 
-  // it('should add card to favoriteList when parameter is true', () => {
-  //   const fave = true;
-  //   const card = {name: "Name"};
+      expect(app.state('favorites')).toEqual(expectation);
+    });
 
-  //   app.instance().clickedCard(fave, card);
+    it('should call addToFavorites with correct params if favorited value is true', () => {
+      const expectation = {name: 'abc', favorited: true};
+      const spy = spyOn(app.instance(), 'addToFavorites')
+      
+      app.instance().clickedCard(true, mockCard);
 
-  //   expect(app.favorites).length.toEqual(1);
-  // })
+      expect(spy).toHaveBeenCalledWith(expectation);
+    });
 
-  // xit('should delete card from favoriteList when parameter is false', () => {
-  // });
+    it('should call removeFromFavorites with correct params if favorited value is false', () => {
+      const expectation = {name: 'abc', favorited: false};
+      const spy = spyOn(app.instance(), 'removeFromFavorites');
+
+      app.instance().clickedCard(false, mockCard);
+
+      expect(spy).toHaveBeenCalledWith(expectation);
+    });
+  });
+
+  describe('ADDTOFAVORITES', () => {
+    it('should add card to favorites in state', () => {
+      const mockCard = {name: 'abc', favorited: true};
+
+      expect(app.state('favorites').length).toEqual(0);
+
+      app.instance().addToFavorites(mockCard);
+
+      expect(app.state('favorites').length).toEqual(1);
+    });
+  });
+
+  describe('REMOVEFROMFAVORITES', () => {
+    xit('should remove card from favorites in state', () => {
+      const mockCard = {name: 'abc', favorited: true};
+      app.instance().addToFavorites(mockCard);
+      expect(app.state('favorites').length).toEqual(1);
+      const spy = spyOn(app.instance(), 'document.querySelector')
+
+      app.instance().removeFromFavorites(mockCard);
+
+      expect(app.state('favorites').length).toEqual(0);
+    });
+  })
+
+  describe('BUTTON CALLBACKS', () => {
+    it('should call updateCardList with correct params', () => {
+
+    })
+  })
+});
