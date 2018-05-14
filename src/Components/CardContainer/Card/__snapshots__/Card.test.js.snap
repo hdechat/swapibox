@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card matches snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Card
+    card={
+        Object {
+            "favorited": false,
+            "name": "Name",
+            "species": "Droid",
+          }
+    }
+    clickedCard={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <img
+          alt="Star Wars Rebel Alliance Logo"
+          className="not-active"
+          onClick={[Function]}
+          src="logo.png"
+/>,
+        Array [
+          <h6>
+            name
+            : 
+            Name
+</h6>,
+          <h6>
+            species
+            : 
+            Droid
+</h6>,
+          undefined,
+        ],
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "alt": "Star Wars Rebel Alliance Logo",
+          "className": "not-active",
+          "onClick": [Function],
+          "src": "logo.png",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": "Name0",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "name",
+            ": ",
+            "Name",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "name",
+          ": ",
+          "Name",
+        ],
+        "type": "h6",
+      },
+      Object {
+        "instance": null,
+        "key": "Droid1",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "species",
+            ": ",
+            "Droid",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "species",
+          ": ",
+          "Droid",
+        ],
+        "type": "h6",
+      },
+      undefined,
+    ],
+    "type": "article",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <img
+            alt="Star Wars Rebel Alliance Logo"
+            className="not-active"
+            onClick={[Function]}
+            src="logo.png"
+/>,
+          Array [
+            <h6>
+              name
+              : 
+              Name
+</h6>,
+            <h6>
+              species
+              : 
+              Droid
+</h6>,
+            undefined,
+          ],
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "Star Wars Rebel Alliance Logo",
+            "className": "not-active",
+            "onClick": [Function],
+            "src": "logo.png",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": "Name0",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "name",
+              ": ",
+              "Name",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "name",
+            ": ",
+            "Name",
+          ],
+          "type": "h6",
+        },
+        Object {
+          "instance": null,
+          "key": "Droid1",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "species",
+              ": ",
+              "Droid",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "species",
+            ": ",
+            "Droid",
+          ],
+          "type": "h6",
+        },
+        undefined,
+      ],
+      "type": "article",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
