@@ -6,11 +6,18 @@ import favoriteButton from '../../../assets/logo.png'
 export default function Card ({ card, clickedCard }) {
   const data = Object.entries(card).map(([key, value], index) => {
     if (key !== 'favorited') {
-      return (
-        <h6 key={value + index}>{key}: {value}</h6>
-      )
+      if(index === Object.entries(card).length - 1) {
+        return (
+          <p key={value + index}>{key}: {value}</p>
+        ) 
+      } else {
+        return (
+          <h6 key={value + index}>{key}: {value}</h6>
+        )
     }
-  })
+  }
+})
+
   return (
     <article>
       <img
