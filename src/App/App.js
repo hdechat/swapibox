@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import TextScroll from '../TextScroll/TextScroll.js';
-import Button from '../Button/Button.js';
-import CardContainer from '../CardContainer/CardContainer.js';
+import TextScroll from '../Components/TextScroll/TextScroll.js';
+import Button from '../Components/Button/Button.js';
+import CardContainer from '../Components/CardContainer/CardContainer.js';
 import ApiCalls from '../ApiCalls/ApiCalls.js'
 const call = new ApiCalls();
 
@@ -29,8 +29,11 @@ export default class App extends Component {
         'text': movieText.opening_crawl,
         'released': movieText.release_date
       }
+
     this.setState({ textCrawl });
   }
+
+  
 
   clickedCard = (faved, card) => {
     const upDatedCard = {...card, favorited: faved}
@@ -39,11 +42,7 @@ export default class App extends Component {
 
     this.setState({ cardList: upDatedCardList });
 
-    if(faved) {
-      this.addToFavorites(upDatedCard);
-    } else {
-      this.removeFromFavorites(card);
-    }
+    faved ? this.addToFavorites(upDatedCard) : this.removeFromFavorites(card);
   }
 
   addToFavorites(card) {
@@ -52,7 +51,7 @@ export default class App extends Component {
 
   removeFromFavorites(card) {
     const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
-    this.setState({ favorites: upDatedFaves});
+    this.setState({ favorites: upDatedFaves });
 
     if(document.querySelector('.favorites').classList.value.includes('active')) {
       this.setState({ cardList: upDatedFaves });
@@ -63,24 +62,32 @@ export default class App extends Component {
     this.setState({ cardList: this.state.favorites });
   }
 
-  fetchPeople = async () => {
+  //create helper file and move the guts into there. can the only call back be thue update?
+  //rename thse callbacks to 'render' instead of fetch
 
+  fetchPeople = async () => {
     const peopleData = await call.fetchCall(this.state.categoryLinks.people);
     const cleanPeopleData = await call.cleanPeopleData(peopleData.results);
-    const cardList = cleanPeopleData.map(card => {
-      const favorited = this.state.favorites.find(fave => fave.name === card.name);
-      return (favorited ? favorited : card);
-    });
-    this.setState({ cardList });
+    this.updateCardListToRender(cleanPeopleData);
   }
 
   fetchVehicles = async () => {
     const vehiclesData = await call.fetchCall(this.state.categoryLinks.vehicles);
     const cleanVehiclesData = call.cleanVehiclesData(vehiclesData.results);
-    const cardList = cleanVehiclesData.map(card => {
+    this.updateCardListToRender(cleanVehiclesData);
+  }
+
+  fetchPlanets = async () => {
+    const planetsData = await call.fetchCall(this.state.categoryLinks.planets);
+    const cleanPlanetsData = await call.cleanPlanetsData(planetsData.results);
+    this.updateCardListToRender(cleanPlanetsData);
+  }
+
+  updateCardListToRender = (data) => {
+    const cardList = data.map(card => {
       const favorited = this.state.favorites.find(fave => fave.name === card.name);
       return (favorited ? favorited : card);
-    });
+    })
     this.setState({ cardList });
   }
   
@@ -95,7 +102,7 @@ export default class App extends Component {
             <Button category={"favorites"} callback={this.showFavorites} />
             <Button category={"People"} callback={this.fetchPeople} />
             <Button category={"Vehicles"} callback={this.fetchVehicles} />
-            <Button category={"Planets"} callback={()=>{}} />
+            <Button category={"Planets"} callback={this.fetchPlanets} />
           </div>
           <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>
         </main>
