@@ -9,6 +9,10 @@ aside {
   z-index: 10;
 }
 
+main {
+  text-align: center;
+}
+
 .background {
   background: url('../assets/background-sw.png');
   background-size: cover;
@@ -21,4 +25,8 @@ aside {
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 15rem;
+}
+
+.loading-gif {
+  width: 85%;
 }
