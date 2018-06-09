@@ -15,6 +15,7 @@ export default class App extends Component {
       textCrawl: {},
       cardList: [],
       favorites: [],
+      isLoading: false
     } 
   }
 
@@ -77,33 +78,49 @@ export default class App extends Component {
     this.setState({ cardList: this.state.favorites });
   }
 
-  //create helper file and move the guts into there. can the only call back be thue update?
-  //rename thse callbacks to 'render' instead of fetch
-
   fetchPeople = async () => {
+    this.setState({ isLoading: true });
     const peopleData = await call.fetchCall(this.state.categoryLinks.people);
     const cleanPeopleData = await call.cleanPeopleData(peopleData.results);
     this.updateCardListToRender(cleanPeopleData);
   }
 
   fetchVehicles = async () => {
+    this.setState({ isLoading: true });
     const vehiclesData = await call.fetchCall(this.state.categoryLinks.vehicles);
     const cleanVehiclesData = call.cleanVehiclesData(vehiclesData.results);
     this.updateCardListToRender(cleanVehiclesData);
   }
 
   fetchPlanets = async () => {
+    this.setState({ isLoading: true });
     const planetsData = await call.fetchCall(this.state.categoryLinks.planets);
     const cleanPlanetsData = await call.cleanPlanetsData(planetsData.results);
     this.updateCardListToRender(cleanPlanetsData);
   }
 
   updateCardListToRender = (data) => {
+    this.setState({ isLoading: false});
     const cardList = data.map(card => {
       const favorited = this.state.favorites.find(fave => fave.name === card.name);
       return (favorited ? favorited : card);
     })
     this.setState({ cardList });
+  }
+
+  displayLoadingGifOrContainer = () => {
+    if(this.state.isLoading) {
+      return (
+        <img 
+      className="loading-gif" 
+      src="https://media.giphy.com/media/5tRGwBkWx8Vt6/giphy.gif" 
+      alt="Chewbaca relaxing" />
+      );
+    } else {
+      return (
+        <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>
+      )
+    }
   }
   
   render() {
@@ -119,7 +136,7 @@ export default class App extends Component {
             <Button category={"Vehicles"} callback={this.fetchVehicles} />
             <Button category={"Planets"} callback={this.fetchPlanets} />
           </div>
-          <CardContainer clickedCard={this.clickedCard} cardList={this.state.cardList}/>
+          {this.displayLoadingGifOrContainer()}
         </main>
       </div>
     );
