@@ -19,7 +19,7 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    const categoryLinks = await call.fetchCall('https://swapi.co/api');
+    const categoryLinks = await call.fetchCall('https://swapi.co/api/');
     this.setState({ categoryLinks });
 
     let randomFilm = Math.floor(Math.random() * 7 + 1);
