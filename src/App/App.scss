@@ -17,5 +17,10 @@ main {
 }
 
 .loading-gif {
-  width: 85%;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://media.giphy.com/media/5tRGwBkWx8Vt6/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
