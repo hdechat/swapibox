@@ -15,11 +15,7 @@ img {
 }
 
 img.active {
-  background: red;
-  border-radius: 50%;
+  background-image: url('../../../assets/logo-red.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
-
-img.not-active {
-  border-radius: 50%;
-}
-

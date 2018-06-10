@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Card.css'
 import favoriteButton from '../../../assets/logo.png'
+// import favorited from '../../../assets/logo-red.png'
 
 export default function Card ({ card, clickedCard }) {
   const data = Object.entries(card).map(([key, value], index) => {
@@ -22,7 +23,7 @@ export default function Card ({ card, clickedCard }) {
     <article>
       <img
         onClick={() => clickedCard(!card.favorited, card)}
-        className={card.favorited ? 'active' : 'not-active'}
+        className={card.favorited ? 'active' : ''}
         src={favoriteButton}
         alt="Star Wars Rebel Alliance Logo"
       />
