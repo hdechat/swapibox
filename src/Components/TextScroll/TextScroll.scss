@@ -1,20 +1,42 @@
-.textScroll{
-  animation-duration: 10s;
-  animation-name: crawl;
-  color: #c0bb00;
-  font-family: 'Oswald', sans-serif;
-  font-size: 2rem;
-  font-weight: 400;
-  left: 25%;
-  letter-spacing: .2rem;
-  position: absolute;
-  text-align: justify;
-  width: 50%;
+.textcrawl-container {
+  background: url("../../assets/starry-night.png");
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
 
+.star-wars {
+  border: none;
+  color: #feda4a;
+  display: flex;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 500%;
+  font-weight: 600;
+  height: 800px;
+  justify-content: center;
+  letter-spacing: 6px;
+  line-height: 150%;
+  perspective: 400px;
+  position: relative;
+  text-align: justify;
+  width: 100%;
+}
+
+.crawl {
+  position: relative;
+  transform-origin: 50% 10%;
+  animation: crawl 70s linear;
 }
 
 
+
 @keyframes crawl {
-    0%   {top: 100%; transform: rotateX(20deg)  translateZ(0);}
-    100% {top: 0%; transform: rotateX(25deg) translateZ(-2500px);}
+  0% {
+    top: 10em;
+    transform: rotateX(40deg) translateZ(0);
+  }
+  85% { 
+    top: -6000px;
+    transform: rotateX(0deg) translateZ(-2500px);
+  }
 }
