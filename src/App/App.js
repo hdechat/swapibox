@@ -109,10 +109,9 @@ export default class App extends Component {
   displayLoadingGifOrContainer = () => {
     if(this.state.isLoading) {
       return (
-        <img 
-      className="loading-gif" 
-      src="https://media.giphy.com/media/5tRGwBkWx8Vt6/giphy.gif" 
-      alt="Chewbaca relaxing" />
+        <div className="loading-gif">
+          <h1>Cards are loading...</h1>
+        </div>
       );
     } else {
       return (
