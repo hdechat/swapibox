@@ -35,18 +35,16 @@ export default class App extends Component {
 
     for( let i=0; i<localStorage.length; i++) {
       const key = localStorage.key(i)
-      this.state.favorites.push(JSON.parse(localStorage.getItem(key)))
+      if(key.includes('SW')) {
+        this.state.favorites.push(JSON.parse(localStorage.getItem(key)))
+      }
     }
     this.setState({ favorites: this.state.favorites });
   }
 
   setToStorage(card) {
     const stringified = JSON.stringify(card)
-    localStorage.setItem(card.name, stringified);
-  }
-
-  getFromStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
+    localStorage.setItem('SW' + card.name, stringified);
   }
 
   clickedCard = (faved, card) => {
@@ -65,7 +63,7 @@ export default class App extends Component {
   }
 
   removeFromFavorites(card) {
-    localStorage.removeItem(card.name)
+    localStorage.removeItem('SW' + card.name)
     const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
     this.setState({ favorites: upDatedFaves });
 
