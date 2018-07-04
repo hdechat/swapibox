@@ -9,7 +9,7 @@ const TextScroll = ({ textCrawl }) => {
       <audio autoPlay>
         <source src={starWarsAudio} type="audio/mpeg" />
       </audio>
-      <button onClick={() => document.querySelector('aside').style.display = 'none'}>Click</button>
+      <button className="enter-button" onClick={() => document.querySelector('aside').style.display = 'none'}>Click to Enter</button>
       <section className="star-wars">
         <div className="crawl">
           <p>{textCrawl.text}</p>

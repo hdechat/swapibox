@@ -12,5 +12,16 @@ button.active {
   color: white;
 }
 
+button.enter-button {
+  background: #00A2D4;
+  color: white;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  margin: auto;
+  width: 100%;
+}
 
-
+.enter-button:hover {
+  background: orangered;
+  color: black;
+}
