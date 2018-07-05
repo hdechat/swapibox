@@ -7,7 +7,8 @@ SwapiBox provides Star Wars data fetched from SWapi.co. Built for Star Wars fans
 With this project I focused on gaining more fluency with React and improving my test writing skills. My learning take away was the importance of spending more time planning the organization of the app architecture and wireframing my components.
 
 ### Example 
-![screen shot 2018-05-14 at 4 23 11 am](src/assets/screenshot-title-scroll.png)
+![screen shot 2018-05-14 at 4 23 11 am](src/assets/screenshot-title-scroll.png)    
+![](https://media.giphy.com/media/1ZrZPQDGeUMhrSATHD/giphy.gif)
 
 ### Technologies  
 React - Jest - Enzyme  
