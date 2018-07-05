@@ -1,19 +1,23 @@
 button {
+  background: #8b7514;
+  border: solid;
+  border-style: outset;
+  color: #150b0e;
   font-family: 'Oswald', sans-serif;
   font-size: 1.5rem;
   height: 3rem;
+  letter-spacing: 3px;
   outline: none;
-  margin: auto 6rem;
   width: 10rem;
 }
 
 button.active {
-  background: black;
-  color: white;
+  color: #dddbe6;
 }
 
 button.enter-button {
-  background: #00A2D4;
+  background: #00a2d4;
+  border-radius: 0%;
   color: white;
   font-size: 30px;
   letter-spacing: 0.1em;

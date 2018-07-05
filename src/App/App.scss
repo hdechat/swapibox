@@ -1,9 +1,11 @@
 main {
+  padding-top: 5px;
   text-align: center;
 }
 
 .background {
-  background: url('../assets/background-sw.png');
+  background: url('../assets/hyper-space.png') 50%;
+  background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Pathway Gothic One', sans-serif;
   height: 850px;
@@ -12,15 +14,17 @@ main {
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 15rem;
+  justify-content: space-between;
+  margin: auto 12%;
+  padding-top: 6rem;
 }
 
 .loading-gif {
-  color: white;
-  width: 100vw;
-  height: 100vh;
   background-image: url("https://media.giphy.com/media/5tRGwBkWx8Vt6/giphy.gif");
   background-repeat: no-repeat;
   background-size: cover;
+  color: white;
+  height: 500px;
+  margin: 0 auto;
+  width: 75%;
 }

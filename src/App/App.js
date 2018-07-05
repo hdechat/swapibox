@@ -67,7 +67,7 @@ export default class App extends Component {
     const upDatedFaves = this.state.favorites.filter(fave => fave.name !== card.name);
     this.setState({ favorites: upDatedFaves });
 
-    if(document.querySelector('.favorites').classList.value.includes('active')) {
+    if(document.querySelector('.Favorites').classList.value.includes('active')) {
       this.setState({ cardList: upDatedFaves });
     }
   }
@@ -127,8 +127,9 @@ export default class App extends Component {
           <TextScroll textCrawl={this.state.textCrawl} />
         </aside>
         <main>
+          <a href="https://fontmeme.com/star-wars-font/"><img src="https://fontmeme.com/permalink/180705/3500454798e6441236adef48687cb04e.png" alt="star-wars-font" border="0" /></a>
           <div className="buttons">
-            <Button category={"favorites"} callback={this.showFavorites} />
+            <Button category={"Favorites"} callback={this.showFavorites} />
             <Button category={"People"} callback={this.fetchPeople} />
             <Button category={"Vehicles"} callback={this.fetchVehicles} />
             <Button category={"Planets"} callback={this.fetchPlanets} />

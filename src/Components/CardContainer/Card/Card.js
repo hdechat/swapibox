@@ -13,7 +13,10 @@ export default function Card ({ card, clickedCard }) {
         ) 
       } else {
         return (
-          <h6 key={value + index}>{key}: {value}</h6>
+          <div className="card-item">
+            <h6 className="card-item-key" key={value + index}>{key}:</h6>
+            <h6 className="card-item-value">{value}</h6>
+          </div>
         )
     }
   }

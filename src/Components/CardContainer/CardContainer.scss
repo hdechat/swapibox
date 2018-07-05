@@ -9,12 +9,22 @@ section {
   overflow-y: scroll;
 }
 
+.card-container {
+  border: none;
+  border-style: inset;
+}
+
 h1 {
   font-size: 50px;
 }
 
 .no-cards {
+  background: black;
+  color: #feda4a;
   display: block;
+  font-size: 400%;
+  height: 75px;
+  letter-spacing: 0.1em;
   margin-top: 10rem;
 }
 
